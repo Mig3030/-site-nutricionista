@@ -23,8 +23,8 @@ const AgendamentoConsulta = ({ isOpen, onClose }) => {
 
   const tiposConsulta = [
     { 
-      value: 'nutricao-adultos', 
-      label: 'Nutrição para Adultos', 
+      value: 'nutricao-Gestantes', 
+      label: 'Nutrição para Gestantes', 
       preco: 'R$ 240,00',
       descricao: 'Inclui acompanhamento nutricional, exames bioquímicos, acompanhamento em tempo real via whatsapp e demandas personalizada. Opcional: cardápio mensal. Inclui 1 consulta + 1 retorno.'
     },
