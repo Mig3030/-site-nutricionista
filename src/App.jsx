@@ -68,24 +68,7 @@ function App() {
   }, [])
 
   // Animação do header ao scroll
-  useEffect(() => {
-    const header = document.querySelector('header')
-    if (!header) return
-
-    gsap.to(header, {
-      scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        onUpdate: (self) => {
-          if (self.getVelocity() < -300) {
-            gsap.to(header, { y: -100, duration: 0.2 })
-          } else if (self.getVelocity() > 300) {
-            gsap.to(header, { y: 0, duration: 0.2 })
-          }
-        }
-      }
-    })
-  }, [])
+  
 
   // Animação das seções ao entrar na viewport
   useEffect(() => {
@@ -219,12 +202,20 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* Header/Navigation */}
-      <header className="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+      <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-16 w-full">
             <div className="flex items-center">
               <img src={Logo} alt="NUTRI PEQUENOS PASSOS Logo" className="h-10 w-auto mr-2" />
-              <span className="text-xl font-bold text-gray-900">NUTRI PEQUENOS PASSOS</span>
+              <span className="text-xl font-bold text-gray-900 hidden sm:inline">NUTRI PEQUENOS PASSOS</span>
+              <div className="flex items-center space-x-3 ml-4">
+                <a href="https://www.instagram.com/nutripequenospassos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transform hover:scale-110 transition-transform duration-300">
+                  <Instagram className="h-6 w-6 text-pink-500 hover:text-pink-700 transition-colors" />
+                </a>
+                <a href="https://www.facebook.com/people/Nutri-pequenos-passos/61572299105703/#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transform hover:scale-110 transition-transform duration-300">
+                  <Facebook className="h-6 w-6 text-pink-500 hover:text-pink-700 transition-colors" />
+                </a>
+              </div>
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="#inicio" className="text-gray-700 hover:text-pink-500 transition-colors duration-300">Início</a>
@@ -250,11 +241,11 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 ref={heroTitleRef} className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Transforme sua 
+                Invista na sua 
                 <span className="text-pink-500"> saúde</span> através da alimentação
               </h1>
               <p ref={heroDescRef} className="mt-4 text-lg text-gray-700">
-                Somos a NUTRI PEQUENOS PASSOS, uma equipe de nutricionistas dedicadas a ajudar você a alcançar seus objetivos de saúde através de uma alimentação equilibrada e personalizada.
+                A Nutri Pequenos Passos é um conjunto de ideias, especializada em nutrição materno infantil, que tem como objetivo tratar do público infantojuvenil, ou seja, especialidade em gestantes, crianças e adolescentes, e também cuidamos da reeducação alimentar familiar.
               </p>
               <div ref={heroButtonRef} className="flex flex-col sm:flex-row gap-4 mt-8">
                 <Button 
@@ -272,8 +263,8 @@ function App() {
             </div>
             <div ref={heroImageRef} className="relative">
               <div className="bg-pink-100 rounded-full w-96 h-96 mx-auto flex items-center justify-center shadow-2xl">
-                <div className="bg-pink-200 rounded-full w-80 h-80 flex items-center justify-center">
-                  <Heart className="h-32 w-32 text-pink-500 animate-pulse" />
+                <div className="bg-pink-200 rounded-full w-80 h-80 flex items-center justify-center p-8 overflow-hidden">
+                  <img src={Logo} alt="NUTRI PEQUENOS PASSOS Logo" className="w-full h-full object-cover rounded-full" />
                 </div>
               </div>
             </div>
@@ -494,21 +485,21 @@ function App() {
                   <Phone className="h-6 w-6 text-pink-500 mr-4" />
                   <div>
                     <p className="font-semibold">Telefone</p>
-                    <p className="text-gray-600">(11) 99999-9999</p>
+                    <p className="text-gray-600">(41) 98707-8320</p>
                   </div>
                 </div>
                 <div className="flex items-center transform hover:translate-x-2 transition-transform duration-300">
                   <Mail className="h-6 w-6 text-pink-500 mr-4" />
                   <div>
                     <p className="font-semibold">E-mail</p>
-                    <p className="text-gray-600">contato@nutripequenospassos.com.br</p>
+                    <p className="text-gray-600">nutripequenospassos@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-center transform hover:translate-x-2 transition-transform duration-300">
                   <MapPin className="h-6 w-6 text-pink-500 mr-4" />
                   <div>
                     <p className="font-semibold">Endereço</p>
-                    <p className="text-gray-600">Rua das Flores, 123 - Vila Madalena<br />São Paulo - SP</p>
+                    <p className="text-gray-600">Rua Georgi Elias Dayoub Wassouf, 28 - Sala 14 - Novo Mundo, Curitiba - PR</p>
                   </div>
                 </div>
                 <div className="flex items-center transform hover:translate-x-2 transition-transform duration-300">
@@ -516,6 +507,20 @@ function App() {
                   <div>
                     <p className="font-semibold">Horário de Atendimento</p>
                     <p className="text-gray-600">Segunda a Sexta: 8h às 18h<br />Sábado: 8h às 12h</p>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <h4 className="font-semibold mb-2">Localização no Mapa</h4>
+                  <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden border border-gray-200">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.483933392394!2d-49.29750298552937!3d-25.45555888377728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce38d3b2b636f%3A0x3a5b9e5d3e4f2d3!2sR.%20Georgi%20Elias%20Dayoub%20Wassouf%2C%2028%20-%20Novo%20Mundo%2C%20Curitiba%20-%20PR%2C%2081050-410!5e0!3m2!1spt-BR!2sbr!4v1678886400000!5m2!1spt-BR!2sbr"
+                      width="100%"
+                      height="200"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    ></iframe>
                   </div>
                 </div>
                 <div className="flex space-x-4 mt-6">
@@ -585,13 +590,14 @@ function App() {
             <div>
               <h3 className="text-xl font-bold mb-4">Contato</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>(11) 99999-9999</li>
-                <li>contato@nutripequenospassos.com.br</li>
-                <li>Rua das Flores, 123 - Vila Madalena<br />São Paulo - SP</li>
+                <li>(41) 98707-8320</li>
+                <li>nutripequenospassos@gmail.com</li>
+                <li>Rua Georgi Elias Dayoub Wassouf, 28 - Sala 14 - Novo Mundo, Curitiba - PR</li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2024 NUTRI PEQUENOS PASSOS. Todos os direitos reservados.</p>
           </div>
         </div>

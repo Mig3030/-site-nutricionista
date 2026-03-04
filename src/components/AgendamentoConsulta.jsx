@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from './ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card.jsx'
 import { Input } from './ui/input.jsx'
@@ -369,4 +369,3 @@ const AgendamentoConsulta = ({ isOpen, onClose }) => {
 }
 
 export default AgendamentoConsulta
-
