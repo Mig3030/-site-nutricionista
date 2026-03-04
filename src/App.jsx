@@ -327,7 +327,7 @@ function App() {
             <Card data-service-card className="hover:shadow-2xl transition-all duration-300 border-pink-100">
               <CardHeader>
                 <Users className="h-12 w-12 text-pink-500 mb-4" />
-                <CardTitle>Nutrição para Adultos</CardTitle>
+                <CardTitle>Nutrição para Gestantes</CardTitle>
                 <CardDescription>
                   R$ 240,00 - Inclui 1 consulta + 1 retorno. Foco em acompanhamento nutricional e demandas personalizadas.
                 </CardDescription>
