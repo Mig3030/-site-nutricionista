@@ -97,49 +97,48 @@ const AgendamentoConsulta = ({ isOpen, onClose }) => {
     setSuccessMessage('')
 
     try {
-      // Preparar dados para envio
-      const formData = new FormData()
-      formData.append('name', agendamento.nome)
-      formData.append('email', agendamento.email)
-      formData.append('phone', agendamento.telefone)
-      formData.append('consultation_type', tiposConsulta.find(t => t.value === agendamento.tipoConsulta)?.label)
-      formData.append('modality', agendamento.modalidade)
-      formData.append('date', agendamento.data)
-      formData.append('time', agendamento.horario)
-      formData.append('observations', agendamento.observacoes)
-      formData.append('price', tiposConsulta.find(t => t.value === agendamento.tipoConsulta)?.preco)
+      // Buscar informações da consulta selecionada
+      const consultaSelecionada = tiposConsulta.find(t => t.value === agendamento.tipoConsulta)
+      const dataFormatada = new Date(agendamento.data + 'T00:00:00').toLocaleDateString('pt-BR')
 
-      // Enviar para Formspree
-      const response = await fetch('https://formspree.io/f/xjkryqrp', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
+      // Montar a mensagem para o WhatsApp
+      const mensagem = `Olá! Gostaria de agendar uma consulta:%0A%0A` +
+        `*Serviço:* ${consultaSelecionada?.label}%0A` +
+        `*Modalidade:* ${agendamento.modalidade}%0A` +
+        `*Data:* ${dataFormatada}%0A` +
+        `*Horário:* ${agendamento.horario}%0A` +
+        `*Valor:* ${consultaSelecionada?.preco}%0A%0A` +
+        `*Dados Pessoais:*%0A` +
+        `*Nome:* ${agendamento.nome}%0A` +
+        `*E-mail:* ${agendamento.email}%0A` +
+        `*Telefone:* ${agendamento.telefone}%0A` +
+        (agendamento.observacoes ? `%0A*Observações:* ${agendamento.observacoes}` : '')
 
-      if (response.ok) {
-        setSuccessMessage('✅ Agendamento realizado com sucesso! Você receberá uma confirmação por e-mail.')
-        setTimeout(() => {
-          onClose()
-          setStep(1)
-          setAgendamento({
-            tipoConsulta: '',
-            modalidade: '',
-            data: '',
-            horario: '',
-            nome: '',
-            email: '',
-            telefone: '',
-            observacoes: ''
-          })
-          setSuccessMessage('')
-        }, 2000)
-      } else {
-        setErrorMessage('Erro ao enviar agendamento. Tente novamente.')
-      }
+      // Número da nutricionista (com código do país)
+      const numeroWhatsApp = '554187078320'
+
+      // Abrir o WhatsApp com a mensagem pronta
+      const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`
+      window.open(urlWhatsApp, '_blank')
+
+      setSuccessMessage('✅ Redirecionando para o WhatsApp! Envie a mensagem para confirmar seu agendamento.')
+      setTimeout(() => {
+        onClose()
+        setStep(1)
+        setAgendamento({
+          tipoConsulta: '',
+          modalidade: '',
+          data: '',
+          horario: '',
+          nome: '',
+          email: '',
+          telefone: '',
+          observacoes: ''
+        })
+        setSuccessMessage('')
+      }, 3000)
     } catch (error) {
-      setErrorMessage('Erro ao conectar ao servidor. Verifique sua conexão.')
+      setErrorMessage('Erro ao redirecionar para o WhatsApp. Tente novamente.')
       console.error('Erro:', error)
     } finally {
       setIsLoading(false)
@@ -386,7 +385,7 @@ const AgendamentoConsulta = ({ isOpen, onClose }) => {
                     <p><strong>Data:</strong> {agendamento.data && new Date(agendamento.data + 'T00:00:00').toLocaleDateString('pt-BR')}</p>
                     <p><strong>Horário:</strong> {agendamento.horario}</p>
                     <p><strong>Valor:</strong> {tiposConsulta.find(t => t.value === agendamento.tipoConsulta)?.preco}</p>
-                    <p className="text-xs text-pink-600 mt-3">Você receberá uma confirmação por e-mail após o envio.</p>
+                    <p className="text-xs text-pink-600 mt-3">Ao confirmar, você será redirecionado para o WhatsApp para enviar a solicitação.</p>
                   </div>
                 </div>
               </div>
