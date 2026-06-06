@@ -115,7 +115,7 @@ const AgendamentoConsulta = ({ isOpen, onClose }) => {
         (agendamento.observacoes ? `%0A*Observações:* ${agendamento.observacoes}` : '')
 
       // Número da nutricionista (com código do país)
-      const numeroWhatsApp = '554187078320'
+      const numeroWhatsApp = '5541988021519'
 
       // Abrir o WhatsApp com a mensagem pronta
       const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`
