@@ -485,7 +485,7 @@ function App() {
                   <Phone className="h-6 w-6 text-pink-500 mr-4" />
                   <div>
                     <p className="font-semibold">Telefone</p>
-                    <p className="text-gray-600">(41) 98707-8320</p>
+                    <p className="text-gray-600">(41) 98802-1519</p>
                   </div>
                 </div>
                 <div className="flex items-center transform hover:translate-x-2 transition-transform duration-300">
@@ -590,7 +590,7 @@ function App() {
             <div>
               <h3 className="text-xl font-bold mb-4">Contato</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>(41) 98707-8320</li>
+                <li>(41) 98802-1519</li>
                 <li>nutripequenospassos@gmail.com</li>
                 <li>Rua Georgi Elias Dayoub Wassouf, 28 - Sala 14 - Novo Mundo, Curitiba - PR</li>
               </ul>
